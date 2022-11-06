@@ -23,4 +23,10 @@ puts "Creating reviews..."
 # *****************************************************************
 # Create Reviews Here
 
+review1 = Review.create(user_id: 1, product_id: 1, star_rating: 3, comment: "Good product but doesn't fit all staple sizes")
+review2 = Review.create(user_id: 1, product_id: 2, star_rating: 5, comment: "Amazing product! Easy to clean")
+review3 = Review.create(user_id: 3, product_id: 1, star_rating: 4, comment: "Strong stapler, lasts long")
+review4 = Review.create(user_id: 2, product_id: 5, star_rating: 2, comment: "No value for money, didn't like it")
+review2 = Review.create(user_id: 3, product_id: 4, star_rating: 5, comment: "Enjoyed writing with this pen")
+
 puts "Seeding done!"
