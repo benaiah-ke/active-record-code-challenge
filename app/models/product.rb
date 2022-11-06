@@ -14,5 +14,17 @@ class Product < ActiveRecord::Base
         }
 
     end
+
+    def average_rating
+
+        total_rating = 0
+
+        self.reviews.each { |review|
+            total_rating += review.star_rating
+        }
+
+        total_rating.to_f/self.reviews.count
+    
+    end
     
 end
