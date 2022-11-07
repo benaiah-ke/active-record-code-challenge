@@ -6,9 +6,8 @@ class User < ActiveRecord::Base
     def favorite_product
 
         self.products.find { |product|
-            product.reviews.star_rating == self.products.maximum(:star_rating)
+            product.review(self.id).star_rating == self.products.maximum(:star_rating)
         }
-
 
     end
     
