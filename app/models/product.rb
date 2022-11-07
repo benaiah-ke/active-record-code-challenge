@@ -4,7 +4,12 @@ class Product < ActiveRecord::Base
     has_many :users, through: :reviews
 
     def leave_review user, star_rating, comment
+
+        duplicate_reviews = self.reviews.select { |review| review.user_id == user.id }
+        duplicate_reviews == [] ? "No duplicate reviews for this product" : duplicate_reviews.each { |review| reviews.delete(review) }
+
         Review.create(user_id: user.id, product_id: self.id, star_rating: star_rating, comment: comment)
+
     end
 
     def print_all_reviews
