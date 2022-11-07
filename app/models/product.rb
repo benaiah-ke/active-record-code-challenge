@@ -5,6 +5,8 @@ class Product < ActiveRecord::Base
 
     def leave_review user, star_rating, comment
 
+        #Checks for duplicate reviews from the same user and deletes it - a user can only review a specific product once
+
         duplicate_reviews = self.reviews.select { |review| review.user_id == user.id }
         duplicate_reviews == [] ? "No duplicate reviews for this product" : duplicate_reviews.each { |review| reviews.delete(review) }
 
@@ -21,17 +23,13 @@ class Product < ActiveRecord::Base
     end
 
     def average_rating
+        self.reviews.average(:star_rating).to_f  
+    end
 
-        # total_rating = 0
+    #Returns a review on an instance of the project class given by a specified user
 
-        # self.reviews.each { |review|
-        #     total_rating += review.star_rating
-        # }
-
-        # total_rating.to_f/self.reviews.count
-
-        self.reviews.average(:star_rating).to_f
-    
+    def review user_id
+        self.reviews.find { |review| review.user_id == user_id }
     end
     
 end
