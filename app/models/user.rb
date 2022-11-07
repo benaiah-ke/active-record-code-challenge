@@ -10,5 +10,9 @@ class User < ActiveRecord::Base
         }
 
     end
+
+    def remove_reviews product
+        reviews.delete(product.reviews.find { |review| review.user_id == self.id })
+    end
     
 end
