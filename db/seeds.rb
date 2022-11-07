@@ -3,6 +3,13 @@
 puts "Deleting old data..."
 Product.destroy_all
 User.destroy_all
+Review.destroy_all
+
+puts "Resetting tables ids..."
+User.connection.execute("UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'users'")
+Product.connection.execute("UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'products'")
+Review.connection.execute("UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'reviews'")
+
 
 puts "Creating users..."
 user1 = User.create(name: Faker::Name.name)
